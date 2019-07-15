@@ -1,10 +1,19 @@
 <?php
 class AccessClass implements ArrayAccess {
     private $container = [];
+    private $int; 
 
-    public function __construct() {
-        for($i = 1; $i <= 32; $i++){
-            $this->container[$i] = $i;
+    public function __construct($int) {
+        $this->int = $int;
+        //konwersja liczby do postaci binarnej
+        $bin = decbin($this->int);
+
+        if($int > 4294967295){
+            throw new \Exception('za duża liczba');
+        }
+        //zapis do tablicy
+        for($i = 0; $i <= strlen($bin)-1; $i++){
+            $this->container[$i] = $bin[$i];
         }
       }
 
@@ -43,16 +52,15 @@ class AccessClass implements ArrayAccess {
     //
 }
 
-$obj = new AccessClass();
+$obj = new AccessClass(489769878);
 //odczyt 
-print_r($obj[15]);
+print_r($obj[4]);
+echo '<br>';
 //zapis
-$obj[15] = 33;
+$obj[4] = 0;
 //odczyt
-print_r($obj[15]);
-//wyświetlenie wszystkich wartości z tablicy
-for($i = 1; $i <= 32; $i++){
-    echo $i .' => '.$obj[$i].'<br>';
-}
+print_r($obj[4]);
+echo '<br>';
+print_r($obj);
 
 ?>
