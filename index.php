@@ -35,6 +35,11 @@ class AccessClass implements ArrayAccess {
             throw new \Exception('zmieniana wartość musi być typu Int');
         }
 
+        //warunek sprawdzający czy wprowadzona wartość jest 0 lub 1
+        if ($value != 0 || $value != 1){
+            throw new \Exception('zmieniana wartość musi być 0 lub 1');
+        }
+
         $this->container[$offset] = $value;
     }
 
